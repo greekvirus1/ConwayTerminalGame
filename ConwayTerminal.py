@@ -1,8 +1,9 @@
 import random
 from blessed import Terminal
 
+#(WIDTH - 2*OFFSET_W) % 2 = 0, AND , (HEIGHT - 2*OFFSET_H) % 2 = 0, should be true for everything to work well
 WIDTH: int = 100 #Total terminal width
-HEIGHT: int = 50 #Total terminal height
+HEIGHT: int = 52 #Total terminal height
 OFFSET_W: int = 4 #Offset width of cell arena 4 characters from left and 4 from right
 OFFSET_H: int = 4 #Offset height of cell arena 4 characters from top and 4 from bottom
 
@@ -84,10 +85,11 @@ def main() -> None:
             print(term.home + term.clear + bgColor + txtColor)
 
             #Render above cell arena
-            print(f"Gen: {generations}" + " " *((WIDTH -32)//2), end="")
-            print("←↑→↓: Move" + " " *((WIDTH -37)//2), end="")
-            print(f"t: Theme -> THEME") #REMEMBER TO FIX THIS
-            print(f"Pop: {population}" + " " *(WIDTH -25), end= "")
+            print(f"Gen: {generations}" + " " *((WIDTH - 32 - len(str(generations))) //2), end="")
+            print("←↑→↓: Move" + " " *((WIDTH - 32 - len(str(generations))) //2), end="")
+            print(f"t: Theme ->THEME") #REMEMBER TO FIX THIS
+            print(f"Pop: {population}" + " " *((WIDTH - 30 - len(str(population))) //2), end= "")
+            print("c: Clear" + " " *((WIDTH - 30 - len(str(population))) //2), end= "")
             print("r: Randomize")
 
             #Render wall around cell arena
@@ -126,8 +128,11 @@ def main() -> None:
             #Wait for input
             print(bgColor, flush=True)
             inp = term.inkey(float(speedList[speedIndex]))
-            
 
+
+
+            #Handling inputs
+            
 
 
 
